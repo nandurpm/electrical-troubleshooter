@@ -6,3 +6,4 @@
 - [x] Ensure all embedded guidance is observational, generic, isolation/lockout-first, and explicit about qualified service boundaries.
 - [x] Add Linux/Windows launchers, configurable localhost hosting, documentation, and automated tests.
 - [x] Validate the app, create a private GitHub repository, and push the completed project.
+- [x] Add a production-safe `start` command that serves the generated report over Render’s assigned HTTP port, then validate and push the deployment repair.
