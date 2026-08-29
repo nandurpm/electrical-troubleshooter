@@ -1,3 +1,10 @@
+/*
+ * ============================================================
+ * FILE: tree.test.mjs
+ * PURPOSE: Exercises Electrical Troubleshooter's domain behavior, validation, persistence, reporting, and safety boundaries with the Node.js test runner.
+ * ============================================================
+ */
+
 import assert from "node:assert/strict";import test from "node:test";import { readFile } from "node:fs/promises";import { EXAMPLES } from "../src/examples.mjs";import { back,choose,current,parseProject,reset,start,treeToYaml,validateTree } from "../src/model.mjs";import { reportHtml } from "../src/report.mjs";
 test('traverses safe question branches and supports back/reset',()=>{let state=start(EXAMPLES.motor);assert.equal(current(state).id,'isolation');state=choose(state,0);assert.equal(current(state).id,'visual');state=choose(state,1);assert.equal(current(state).id,'records');state=back(state);assert.equal(current(state).id,'visual');state=reset(state);assert.equal(current(state).id,'isolation')});
 test('rejects cycle and malformed schema',()=>{const cyclic=structuredClone(EXAMPLES.motor);cyclic.nodes.find(n=>n.id==='records').kind='question';cyclic.nodes.find(n=>n.id==='records').choices=[{label:'loop',next:'records'},{label:'back',next:'visual'}];assert.throws(()=>validateTree(cyclic),/cycles/);assert.throws(()=>validateTree({...EXAMPLES.motor,schemaVersion:2}),/Unsupported/);});

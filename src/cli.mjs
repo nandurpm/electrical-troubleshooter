@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/*
+ * ============================================================
+ * FILE: cli.mjs
+ * PURPOSE: Implements Electrical Troubleshooter's command-line interface and coordinates validation, persistence, report generation, and local serving.
+ * ============================================================
+ */
+
 import { createReadStream,existsSync } from "node:fs";import { stat } from "node:fs/promises";import { createServer } from "node:http";import { basename,resolve } from "node:path";import { EXAMPLES } from "./examples.mjs";import { treeToYaml,validateTree } from "./model.mjs";import { writeReport } from "./report.mjs";
 const usage=`Electrical Troubleshooter — safe local educational decision trees\n\nUsage:\n  electrical-troubleshooter list\n  electrical-troubleshooter validate <json-file>\n  electrical-troubleshooter demo [--tree motor|panel|sensor|power] [--out reports/demo]\n  electrical-troubleshooter serve <report-directory> [--port 4069]\n  electrical-troubleshooter start`;
 function parse(args){const values=new Map(),positional=[];for(let i=0;i<args.length;i+=1){const token=args[i];if(!token.startsWith('--')){positional.push(token);continue}const[key,inline]=token.split('=',2);values.set(key,inline??args[++i])}return{values,positional}}const print=value=>process.stdout.write(`${JSON.stringify(value,null,2)}\n`);

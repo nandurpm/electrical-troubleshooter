@@ -1,3 +1,10 @@
+/*
+ * ============================================================
+ * FILE: examples.mjs
+ * PURPOSE: Provides validated troubleshooting-tree examples used to demonstrate Electrical Troubleshooter's diagnostic workflow.
+ * ============================================================
+ */
+
 import { REQUIRED_SAFETY } from "./model.mjs";
 const base=(id,title,nodes)=>({schemaVersion:1,id,title,safety:REQUIRED_SAFETY,startId:"isolation",nodes:[{id:"isolation",kind:"question",prompt:"Before any inspection, has the equipment been isolated, locked out where applicable, and verified de-energized by qualified personnel?",explanation:"This guide only continues with safe, non-energized, observational steps.",warning:REQUIRED_SAFETY,choices:[{label:"Yes — isolation and verification are complete",next:"visual"},{label:"No or uncertain",next:"stop"}]},{id:"stop",kind:"terminal",prompt:"Stop and obtain qualified assistance before continuing.",explanation:"Do not bypass isolation, lockout, guards, or protective devices. Follow site procedures and use qualified personnel.",warning:REQUIRED_SAFETY},...nodes]});
 export const EXAMPLES={

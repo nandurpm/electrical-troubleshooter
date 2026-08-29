@@ -1,3 +1,10 @@
+/*
+ * ============================================================
+ * FILE: model.mjs
+ * PURPOSE: Defines Electrical Troubleshooter's domain model, validation rules, calculations, and aggregation helpers.
+ * ============================================================
+ */
+
 import { randomUUID } from "node:crypto";
 export const SCHEMA_VERSION=1;
 export const REQUIRED_SAFETY="Do not work on exposed energized equipment. Isolate, lock out, and verify the equipment is de-energized; use qualified personnel where required.";
